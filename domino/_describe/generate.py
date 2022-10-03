@@ -60,10 +60,7 @@ def generate_candidate_descriptions(
     candidate_phrases = words_dp["word"].map(
         _forward_mlm, is_batched_fn=True, batch_size=16, pbar=True
     )
-
-    if candidate_phrases is None:
-        raise ValueError("No candidate phrases generated")
-
+    assert candidate_phrases is not None, "Huh????"
     candidate_phrases = (
         candidate_phrases.to_pandas()
         .dropna()
